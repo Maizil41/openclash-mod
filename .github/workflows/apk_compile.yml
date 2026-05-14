@@ -53,9 +53,8 @@ jobs:
         run: |
           echo -e "\033[34m🔍 Updating SDK feeds \033[0m"
           cd sdk
-          ./scripts/feeds update -a > /dev/null 2>&1
-          ./scripts/feeds install -a > /dev/null 2>&1
-
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
       - name: ⛏️ Compile po2lmo
         run: |
           cd sdk/package/${PKG_NAME}/tools/po2lmo
@@ -64,7 +63,7 @@ jobs:
       - name: ⚙️ Configure & compile APK
         run: |
           echo -e "\033[34m🔧 Configuring SDK \033[0m"
-          cd sdk && make defconfig > /dev/null 2>&1
+          cd sdk && make defconfig
           rm -rf feeds/luci/contrib/package/csstidy
           sed -i '/^CONFIG_LUCI_JSMIN=/d' .config
           sed -i '/^CONFIG_LUCI_CSSTIDY=/d' .config
